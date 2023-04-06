@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 
  //Connection to MongoDB Compass locally
  //const mongoURI = "mongodb://localhost:27017/NPL?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false"
-const {MONGOURI}=require('./keys')
+// const {MONGOURI}=require('./keys')
+const MONGOURI=process.env.DATABASE;
 const connectToMongo = ()=>{
     mongoose.connect(MONGOURI, ()=>{
         console.log("Connected to Mongo Successfully");

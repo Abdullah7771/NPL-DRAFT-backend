@@ -1,3 +1,4 @@
+require('dotenv').config();
 const connectToMongo = require('./db');
 const express = require('express')
 var cors = require('cors') 
@@ -26,6 +27,20 @@ app.use('/api/round', require('./routes/round'));
 //   module.exports=require('./dev');
 // }
 
+
+if ( process.env.NODE_ENV == "production"){
+
+  app.use(express.static("frontend/build"));
+
+  // const path = require("path");
+
+  // app.get("*", (req, res) => {
+
+  //     res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+
+  }
+
+  
 app.listen(port, () => {
   console.log(`NPL Draft backend listening at ${port}`)
 })
