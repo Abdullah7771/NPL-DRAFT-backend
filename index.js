@@ -28,6 +28,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+//done
 app.get('/api/*', (req, res) => {
   res.status(404).send({ message: 'API endpoint not found' });
 });
