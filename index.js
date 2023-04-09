@@ -2,6 +2,7 @@ require('dotenv').config();
 const connectToMongo = require('./db');
 const express = require('express')
 var cors = require('cors') 
+const path = require('path');
 
 connectToMongo();
 const app = express()
@@ -37,17 +38,26 @@ app.get('/api/*', (req, res) => {
 
 
 
-if ( process.env.NODE_ENV == "production"){
 
-  app.use(express.static("frontend/build"));
+app.use(express.static(path.join(__dirname, 'build')));
 
-  // const path = require("path");
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
-  // app.get("*", (req, res) => {
 
-  //     res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
 
-  }
+// if ( process.env.NODE_ENV == "production"){
+
+//   app.use(express.static("frontend/build"));
+
+//   const path = require("path");
+
+//   app.get("*", (req, res) => {
+
+//       res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+
+//   }
 
 
 app.listen(port, () => {
